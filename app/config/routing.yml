@@ -1,0 +1,19 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+guests:
+    type: rest
+    resource: AppBundle\Controller\ParticipantController
+
+events:
+    type: rest
+    resource: AppBundle\Controller\EventController
+
+venues:
+    type: rest
+    resource: AppBundle\Controller\VenueController

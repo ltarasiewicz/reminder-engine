@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Run 'php app/console $*' on php-fpm-alpine";
+docker exec -it -u luqo33 php-fpm-alpine sh -c "cd /var/www/html && php bin/console $*"

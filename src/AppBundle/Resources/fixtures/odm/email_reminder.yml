@@ -1,0 +1,5 @@
+AppBundle\Entity\EmailReminder:
+  email_reminder_{1..10}:
+      time: '<date()>'
+      status: 2
+      emailAddress: example@email.com

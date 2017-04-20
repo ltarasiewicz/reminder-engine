@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+#  jenkins-alpine:
+#    build: ./jenkins-fpm
+#    container_name: jenkins-fpm
+#    ports:
+#      - "8888:8080"
+#      - "50001:50001"
+#    environment:
+#        - JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties"
+#        - JENKINS_SLAVE_AGENT_PORT=50001
+#    volumes:
+#      - "/home/luqo33/docker/dev/reminder-engine/jenkins_data:/var/jenkins_home:rw"
+  mongodb:
+    build: ./mongodb
+    image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/mongodb:v0.1
+    container_name: mongodb
+    env_file:
+      - mongodb/mongo-params.env
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+  php-fpm-alpine:
+    build: ./php-fpm-alpine
+    image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/php-fpm-alpine-sf-dev:v0.1
+    volumes_from:
+      - sourcecode-data
+  nginx-alpine: # from alpine:3.4
+    build: ./nginx-alpine
+    image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/nginx-alpine-sf-dev:v0.1
+    ports:
+      - "8080:80"
+    volumes:
+      - re-nginx-logs:/var/log/nginx:rw
+    volumes_from:
+      - sourcecode-data
+  sourcecode-data: # Data-only container
+    image: nginx:1.11-alpine
+    volumes: # Provide path to your project in the host's filesystem
+      - "../.:/var/www/html:rw"
+
+volumes:
+  re-nginx-logs:
+    external: false

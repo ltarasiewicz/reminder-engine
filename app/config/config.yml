@@ -1,0 +1,94 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi:             ~
+    #translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+fos_rest:
+    routing_loader:
+        default_format: json
+        include_format: false
+    param_fetcher_listener: true
+    body_listener:
+        enabled: true
+        array_normalizer: fos_rest.normalizer.camel_keys
+    disable_csrf_role: ROLE_USER # CSRF protection does not make sense for REST API
+    body_converter:
+        enabled: true # Makes it possible to deserialize the request body into an object (ParamConverters)
+        validate: true # Validate objects deserialized into controller argument
+        validation_errors_argument: validation
+    view:
+        view_response_listener: force # Always return a View instance from a controller, automatically
+        formats:
+            json: true # What is supported by the serializer
+        templating_formats:
+            html: true # What is supported by the templating layer
+        default_engine: twig # Let's make it default, should we need templating down the road
+        failed_validation: HTTP_BAD_REQUEST # 400 - default
+        empty_content: 204 # The default
+
+doctrine_mongodb:
+    connections:
+        default:
+          server: "%mongodb_server%"
+          options: {}
+    default_database: reminder-engine
+    document_managers:
+        default:
+            auto_mapping: true
+
+sensio_framework_extra:
+    view:
+        annotations: true
+    request: { converters: true } # Makes it possible to use a Param
+
+nelmio_api_doc:
+    name: Internal API documentation
+    sandbox:
+        enabled: true
+        body_format:
+            formats: [form, json]
+        request_format:
+            formats:
+                json: application/json

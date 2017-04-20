@@ -1,0 +1,10 @@
+services:
+    app.mongodb_param_converter:
+        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
+        arguments:
+            - "@doctrine_mongodb"
+        tags:
+            - { name: request.param_converter, converter: doctrine.odm }
+
+    app.util.object_property_mapper:
+        class: AppBundle\Util\ObjectPropertyMapper\ObjectPropertyMapper
