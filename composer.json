@@ -35,7 +35,8 @@
         "doctrine/mongodb-odm": "^1.1",
         "ext-mongo": "*",
         "doctrine/doctrine-bundle": "^1.6",
-        "nelmio/api-doc-bundle": "^2.13"
+        "nelmio/api-doc-bundle": "^2.13",
+        "symfony/symfony": "3.2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

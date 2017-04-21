@@ -1,17 +1,18 @@
 version: '2'
 
 services:
-#  jenkins-alpine:
-#    build: ./jenkins-fpm
-#    container_name: jenkins-fpm
-#    ports:
-#      - "8888:8080"
-#      - "50001:50001"
-#    environment:
-#        - JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties"
-#        - JENKINS_SLAVE_AGENT_PORT=50001
-#    volumes:
-#      - "/home/luqo33/docker/dev/reminder-engine/jenkins_data:/var/jenkins_home:rw"
+  jenkins-alpine:
+    image:
+    build: ./jenkins-fpm
+    container_name: jenkins-fpm
+    ports:
+      - "8888:8080"
+      - "50001:50001"
+    environment:
+        - JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties"
+        - JENKINS_SLAVE_AGENT_PORT=50001
+    volumes:
+      - "/home/luqo33/docker/dev/reminder-engine/jenkins_data:/var/jenkins_home:rw"
   mongodb:
     build: ./mongodb
     image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/mongodb:v0.1
@@ -23,6 +24,7 @@ services:
       - "28017:28017"
   php-fpm-alpine:
     build: ./php-fpm-alpine
+    container_name: php_fpm_alpine_re
     image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/php-fpm-alpine-sf-dev:v0.1
     volumes_from:
       - sourcecode-data

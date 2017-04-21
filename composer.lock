@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "00c41ae8c36bd7faa4ae6e2f78d4778b",
+    "content-hash": "937484e2b10c680d241df9ca18ddbd15",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -1935,6 +1935,52 @@
             "time": "2015-07-25T16:39:46+00:00"
         },
         {
+            "name": "psr/cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "time": "2016-08-06T20:24:11+00:00"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.2",
             "source": {
@@ -2648,35 +2694,42 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.0.9",
+            "version": "v3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "634fb8c018532c820debd2678e452a735b9f438e"
+                "reference": "1631040ea8fc5e0e405c00d35cbf2c0b7b555f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/634fb8c018532c820debd2678e452a735b9f438e",
-                "reference": "634fb8c018532c820debd2678e452a735b9f438e",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/1631040ea8fc5e0e405c00d35cbf2c0b7b555f64",
+                "reference": "1631040ea8fc5e0e405c00d35cbf2c0b7b555f64",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
                 "php": ">=5.5.9",
+                "psr/cache": "~1.0",
                 "psr/log": "~1.0",
                 "symfony/polyfill-intl-icu": "~1.0",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php56": "~1.0",
                 "symfony/polyfill-php70": "~1.0",
                 "symfony/polyfill-util": "~1.0",
-                "twig/twig": "~1.23|~2.0"
+                "twig/twig": "~1.28|~2.0"
             },
             "conflict": {
-                "phpdocumentor/reflection": "<1.0.7"
+                "phpdocumentor/reflection-docblock": "<3.0",
+                "phpdocumentor/type-resolver": "<0.2.0",
+                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0"
             },
             "replace": {
                 "symfony/asset": "self.version",
                 "symfony/browser-kit": "self.version",
+                "symfony/cache": "self.version",
                 "symfony/class-loader": "self.version",
                 "symfony/config": "self.version",
                 "symfony/console": "self.version",
@@ -2694,6 +2747,7 @@
                 "symfony/framework-bundle": "self.version",
                 "symfony/http-foundation": "self.version",
                 "symfony/http-kernel": "self.version",
+                "symfony/inflector": "self.version",
                 "symfony/intl": "self.version",
                 "symfony/ldap": "self.version",
                 "symfony/monolog-bridge": "self.version",
@@ -2718,24 +2772,30 @@
                 "symfony/validator": "self.version",
                 "symfony/var-dumper": "self.version",
                 "symfony/web-profiler-bundle": "self.version",
+                "symfony/workflow": "self.version",
                 "symfony/yaml": "self.version"
             },
             "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "doctrine/cache": "~1.6",
                 "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.4",
                 "doctrine/orm": "~2.4,>=2.4.5",
-                "egulias/email-validator": "~1.2,>=1.2.1",
+                "egulias/email-validator": "~1.2,>=1.2.8|~2.0",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
-                "phpdocumentor/reflection": "^1.0.7",
+                "phpdocumentor/reflection-docblock": "^3.0",
+                "predis/predis": "~1.0",
+                "sensio/framework-extra-bundle": "^3.0.2",
+                "symfony/phpunit-bridge": "~3.2",
                 "symfony/polyfill-apcu": "~1.1",
                 "symfony/security-acl": "~2.8|~3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -2774,7 +2834,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-07-30T09:10:53+00:00"
+            "time": "2017-04-05T12:52:29+00:00"
         },
         {
             "name": "twig/twig",
@@ -3766,52 +3826,6 @@
             "time": "2016-11-04T15:53:15+00:00"
         },
         {
-            "name": "psr/cache",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/cache.git",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for caching libraries",
-            "keywords": [
-                "cache",
-                "psr",
-                "psr-6"
-            ],
-            "time": "2016-08-06T20:24:11+00:00"
-        },
-        {
             "name": "sensio/generator-bundle",
             "version": "v3.0.11",
             "source": {
@@ -4031,67 +4045,6 @@
                 "shim"
             ],
             "time": "2016-11-14T01:06:16+00:00"
-        },
-        {
-            "name": "symfony/security-acl",
-            "version": "v2.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/security-acl.git",
-                "reference": "4a3f7327ad215242c78f6564ad4ea6d2db1b8347"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-acl/zipball/4a3f7327ad215242c78f6564ad4ea6d2db1b8347",
-                "reference": "4a3f7327ad215242c78f6564ad4ea6d2db1b8347",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "symfony/security-core": "~2.4|~3.0.0"
-            },
-            "require-dev": {
-                "doctrine/common": "~2.2",
-                "doctrine/dbal": "~2.2",
-                "psr/log": "~1.0",
-                "symfony/phpunit-bridge": "~2.7|~3.0.0"
-            },
-            "suggest": {
-                "doctrine/dbal": "For using the built-in ACL implementation",
-                "symfony/class-loader": "For using the ACL generateSql script",
-                "symfony/finder": "For using the ACL generateSql script"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Security\\Acl\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Security Component - ACL (Access Control List)",
-            "homepage": "https://symfony.com",
-            "time": "2015-12-28T09:39:09+00:00"
         },
         {
             "name": "theofidry/alice-bundle-extension",

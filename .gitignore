@@ -26,5 +26,3 @@ mongo-params.env
 
 # Exclude random backup files
 *~
-
-jenkins_data/
