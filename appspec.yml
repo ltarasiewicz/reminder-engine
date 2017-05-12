@@ -1,0 +1,76 @@
+# For help completing this file, see the "AppSpec File Reference" in the
+#   "AWS CodeDeploy User Guide" at
+#   http://docs.aws.amazon.com/codedeploy/latest/userguide/app-spec-ref.html
+version: 0.0
+os: linux
+files:
+  - source: ./app
+    destination: /home/ec2-user/clients/reminder-engine/webdata/app
+# For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
+#   you can specify a "permissions"
+#   section here that describes special permissions to apply to the files
+#   in the "files" section as they are being copied over to
+#   the Amazon EC2 instance.
+#   For more information, see the documentation.
+#permissions:
+#  - object:
+#    pattern:
+#    except:
+#    owner:
+#    group:
+#    mode:
+#    acls:
+#      -
+#    context:
+#      user:
+#      type:
+#      range:
+#    type:
+#      -
+#hooks:
+## During the ApplicationStop deployment lifecycle event, run the commands
+##   in the script specified in "location" starting from the root of the
+##   revision's file bundle.
+#  ApplicationStop:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
+## During the BeforeInstall deployment lifecycle event, run the commands
+##   in the script specified in "location".
+#  BeforeInstall:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
+## During the AfterInstall deployment lifecycle event, run the commands
+##   in the script specified in "location".
+#  AfterInstall:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
+## During the ApplicationInstall deployment lifecycle event, run the commands
+##   in the script specified in "location".
+#  ApplicationStart:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
+## During the ValidateService deployment lifecycle event, run the commands
+##   in the script specified in "location".
+#  ValidateService:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
