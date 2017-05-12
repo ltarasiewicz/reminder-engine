@@ -4,8 +4,8 @@
 version: 0.0
 os: linux
 files:
-  - source: ./app
-    destination: /home/ec2-user/clients/reminder-engine/webdata/app
+  - source: /
+    destination: /home/ec2-user/clients/reminder-engine/webdata/
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions"
 #   section here that describes special permissions to apply to the files
