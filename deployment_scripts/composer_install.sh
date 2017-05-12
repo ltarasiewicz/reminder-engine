@@ -1,3 +1,3 @@
 #!/bin/sh
 
-composer install
+php composer.phar install
