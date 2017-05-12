@@ -9,7 +9,8 @@ pipelines:
   default:
     - step:
         script:
-          - apt-get update && apt-get install -y unzip python-dev
+          - apt-get update && apt-get install -y unzip
+          - apt-get update && apt-get install -y python-dev
           - curl -O https://bootstrap.pypa.io/get-pip.py
           - python get-pip.py
           - pip install awscli
