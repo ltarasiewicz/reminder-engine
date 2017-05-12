@@ -9,7 +9,10 @@ pipelines:
   default:
     - step:
         script:
-          - apt-get update && apt-get install -y unzip
+          - apt-get update && apt-get install -y unzip python-dev
+          - curl -O https://bootstrap.pypa.io/get-pip.py
+          - python get-pip.py
+          - pip install awscli
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
           - aws deploy push --application-name reminder-engine --s3-location s3://code-deploy-bucket-au/reminder-engine.zip --ignore-hidden-files
