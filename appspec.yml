@@ -26,7 +26,7 @@ permissions:
     group: 82
     mode: 755
     type:
-      - file
+      - directory
 
 hooks:
   AfterInstall:
