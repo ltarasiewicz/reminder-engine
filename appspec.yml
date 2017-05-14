@@ -29,7 +29,5 @@ files:
 #      -
 hooks:
   AfterInstall:
-    - location: deployment_scripts/debug.sh
-      timeout: 360
     - location: deployment_scripts/composer_install.sh
       timeout: 360
