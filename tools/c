@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "Run 'composer #' in the php-fpm container";
-docker exec -it -u luqo33 php-fpm-reminder-engine sh -c "composer $*"
+docker exec -u luqo33 php-fpm-reminder-engine sh -c "composer $*"
