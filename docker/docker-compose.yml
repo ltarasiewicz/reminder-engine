@@ -1,18 +1,18 @@
 version: '2'
 
 services:
-  jenkins-alpine:
-    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/jenkins-alpine:v0.1
-    build: ./jenkins-fpm
-    container_name: jenkins-fpm
-    ports:
-      - "8888:8080"
-      - "50001:50001"
-    environment:
-        - JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties"
-        - JENKINS_SLAVE_AGENT_PORT=50001
-    volumes:
-      - "/home/luqo33/docker/dev/reminder-engine/jenkins_data:/var/jenkins_home:rw"
+#  jenkins-alpine:
+#    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/jenkins-alpine:v0.1
+#    build: ./jenkins-fpm
+#    container_name: jenkins-fpm
+#    ports:
+#      - "8888:8080"
+#      - "50001:50001"
+#    environment:
+#        - JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties"
+#        - JENKINS_SLAVE_AGENT_PORT=50001
+#    volumes:
+#      - "/home/luqo33/docker/dev/reminder-engine/jenkins_data:/var/jenkins_home:rw"
   mongodb:
     build: ./mongodb
     image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/mongodb:v0.1
@@ -24,13 +24,14 @@ services:
       - "28017:28017"
   php-fpm-alpine:
     build: ./php-fpm-alpine
-    container_name: php_fpm_alpine_re
-    image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/php-fpm-alpine-sf-dev:v0.1
+    container_name: php-reminder-engine
+    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/php71-fpm-alpine-sf-dev:v0.1
+    container_name: php-fpm-reminder-engine
     volumes_from:
       - sourcecode-data
   nginx-alpine: # from alpine:3.4
     build: ./nginx-alpine
-    image: 320782110801.dkr.ecr.eu-central-1.amazonaws.com/nginx-alpine-sf-dev:v0.1
+    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/nginx-alpine-wp:v0.7
     ports:
       - "8080:80"
     volumes:

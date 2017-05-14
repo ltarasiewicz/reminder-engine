@@ -1,13 +1,11 @@
 FROM php:7.1.3-fpm-alpine
 
 COPY ./config/www-pool.conf /usr/local/etc/php-fpm.d/www.conf
-#COPY ./scripts/download-composer.sh /root/download-composer.sh
-#
-#WORKDIR /root
 
-#RUN chmod +x download-composer.sh \
-#    && ./download-composer.sh \
-#    && mv composer.phar /usr/local/bin/composer
+RUN apk add unzip python-dev --update
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py && pip install awscli
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN ["mkdir", "/var/log/php-fpm"]
 
@@ -36,3 +34,11 @@ RUN echo "xdebug.ide_key=PHPSTORM" >> /usr/local/etc/php/conf.d/php.ini
 RUN addgroup sudo
 RUN adduser -D luqo33 -G sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+VOLUME ["/var/log/php-fpm"]
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["php-fpm"]
