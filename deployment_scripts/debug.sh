@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ls -al && exit -1
+pwd && ls -al && exit -1
