@@ -13,7 +13,7 @@ pipelines:
   default:
     - step:
         script:
-          - docker ps
+          - id luqo33
           - pwd && ls -al
           - composer install
           - aws deploy push --application-name reminder-engine --s3-location s3://code-deploy-bucket-au/reminder-engine.zip --ignore-hidden-files
