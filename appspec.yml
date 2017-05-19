@@ -6,26 +6,21 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/clients/reminder-engine/webdata/
-# For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
-#   you can specify a "permissions"
-#   section here that describes special permissions to apply to the files
-#   in the "files" section as they are being copied over to
-#   the Amazon EC2 instance.
-#   For more information, see the documentation.
+
 permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
-    owner: ec2-user
-    group: ec2-user
+    owner: luqo33 # luqo33 exists both on host and in php-fpm container with UID 1000
+    group: www-data
     mode: 644
     type:
       - file
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
-    owner: ec2-user
-    group: ec2-user
+    owner: luqo33
+    group: www-data
     mode: 755
-    type:
+  ec2-userec2-user  type:
       - directory
 
 hooks:
