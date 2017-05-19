@@ -15,6 +15,7 @@ pipelines:
         script:
           - id luqo33
           - pwd && ls -al
-          - composer install
-          - aws deploy push --application-name reminder-engine --s3-location s3://code-deploy-bucket-au/reminder-engine.zip --ignore-hidden-files
-          - aws deploy create-deployment --application-name reminder-engine --s3-location bucket=code-deploy-bucket-au,key=reminder-engine.zip,bundleType=zip --deployment-group-name reminder-engine-deployment-group
+          - ps aux
+#          - composer install
+#          - aws deploy push --application-name reminder-engine --s3-location s3://code-deploy-bucket-au/reminder-engine.zip --ignore-hidden-files
+#          - aws deploy create-deployment --application-name reminder-engine --s3-location bucket=code-deploy-bucket-au,key=reminder-engine.zip,bundleType=zip --deployment-group-name reminder-engine-deployment-group
