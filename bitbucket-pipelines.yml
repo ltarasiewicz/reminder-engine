@@ -4,9 +4,9 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image:
-  name: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/php71-fpm-alpine-sf-dev:v0.1
-  username: $AWS_IMAGE_REPOSITORY_USER
-  password: $AWS_IMAGE_REPOSITORY_PASSWORD
+  name: ltarasiewicz/php71-fpm-alpine-sf-dev:v0.1
+  username: $DOCKER_HUB_USER
+  password: $DOCKER_HUB_PASSWORD
   email: none
 
 pipelines:
