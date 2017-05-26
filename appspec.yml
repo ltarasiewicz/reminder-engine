@@ -24,14 +24,14 @@ permissions:
     pattern: "**"
     owner: luqo33
     group: www-data
-    mode: 6750
+    mode: 6751
     type:
       - directory
   - object: /home/ec2-user/clients/reminder-engine/webdata/var
     pattern: "**"
     owner: luqo33
     group: www-data
-    mode: 6770
+    mode: 6771
     type:
       - directory
 
