@@ -22,6 +22,7 @@ permissions:
       - file
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
+    except: [var]
     owner: luqo33
     group: www-data
     mode: 6751
@@ -34,7 +35,6 @@ permissions:
     mode: 6771
     type:
       - directory
-
 
 hooks:
   AfterInstall:
