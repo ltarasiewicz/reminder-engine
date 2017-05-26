@@ -15,6 +15,7 @@ pipelines:
         script:
           - composer install
           - rm -rf vendor/
+          - rm -rf web/bundles/
           - rm -rf var/cache/*
           - rm -rf var/sessions/*
           - rm -rf var/logs/*
