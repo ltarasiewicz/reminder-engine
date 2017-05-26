@@ -30,5 +30,9 @@ permissions:
 
 hooks:
   AfterInstall:
+    - location: deployment_scripts/server_requirements.sh
+      timeout: 120
     - location: deployment_scripts/composer_install.sh
-      timeout: 360
+      timeout: 120
+    - location: deployment_scripts/cache_clear.sh
+      timeout: 120
