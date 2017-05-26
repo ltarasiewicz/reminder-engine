@@ -14,5 +14,9 @@ pipelines:
     - step:
         script:
           - composer install
+          - rm -rf vendor/
+          - rm -rf var/cache/*
+          - rm -rf var/sessions/*
+          - rm -rf var/logs/*
           - aws deploy push --application-name reminder-engine --s3-location s3://code-deploy-bucket-au/reminder-engine.zip --ignore-hidden-files
           - aws deploy create-deployment --application-name reminder-engine --s3-location bucket=code-deploy-bucket-au,key=reminder-engine.zip,bundleType=zip --deployment-group-name reminder-engine-deployment-group

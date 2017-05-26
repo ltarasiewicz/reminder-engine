@@ -17,14 +17,20 @@ permissions:
     pattern: "**"
     owner: luqo33
     group: www-data
-#    mode: 644 If mode is not specified, current settings should be maintained
+    mode: 6644 # Initial '6' means we 'setuid' and 'setgid'
     type:
       - file
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     owner: luqo33
     group: www-data
-#    mode: 755
+    mode: 6750
+    type:
+      - directory
+  - object: /home/ec2-user/clients/reminder-engine/webdata/var
+    owner: luqo33
+    group: www-data
+    mode: 6770
     type:
       - directory
 
