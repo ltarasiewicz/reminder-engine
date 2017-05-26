@@ -33,6 +33,8 @@ permissions:
     owner: luqo33
     group: www-data
     mode: 6771
+    acl:
+      - u:luqo33:rwX
     type:
       - directory
 
