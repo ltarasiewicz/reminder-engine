@@ -35,6 +35,7 @@ permissions:
     mode: 6771
     acl:
       - u:luqo33:rwX
+      - g:www-data:rwX
     type:
       - directory
 
