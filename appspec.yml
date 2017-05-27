@@ -25,7 +25,7 @@ permissions:
     except: [var]
     owner: luqo33
     group: www-data
-    mode: 6751
+    mode: 6777
     type:
       - directory
   - object: /home/ec2-user/clients/reminder-engine/webdata

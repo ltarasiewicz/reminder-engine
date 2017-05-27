@@ -32,7 +32,7 @@ RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/php.ini
 RUN echo "xdebug.ide_key=PHPSTORM" >> /usr/local/etc/php/conf.d/php.ini
 
 RUN addgroup sudo
-RUN adduser -D luqo33 -G sudo
+RUN adduser -D default -G sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY entrypoint.sh /entrypoint.sh

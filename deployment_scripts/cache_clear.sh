@@ -6,4 +6,4 @@
 # export AUTH_PASS=$(aws ssm get-parameters --region ap-southeast-2 --names auth-pass --query Parameters[0].Value)
 
 php_container=$(docker ps | grep php71-fpm | cut -f 1 -d ' ')
-docker exec -u luqo33 ${php_container} php bin/console cache:clear --env=prod --no-debug
+docker exec -u $(id -u $USER) ${php_container} php bin/console cache:clear --env=prod --no-debug
