@@ -13,9 +13,9 @@ host_ip_as_seen_from_docker=`/sbin/ip route|awk '/default/ { print $3 }'`
 echo "xdebug.remote_host=${host_ip_as_seen_from_docker}" >> /usr/local/etc/php/conf.d/php.ini
 
 # Gid 82 is www-data. Uid 1000 is the $CLIENT user. Files should be mounted from host with uid 1000.
-chown -R 1000:82 /var/www/html
-chmod -R u+s /var/www/html && chmod -R g+s /var/www/html
+chown -R :82 /var/www/html
+chmod -R g+s /var/www/html
 chown 82:82 /var/log/php-fpm && chmod 0755 /var/log/php-fpm
-chmod -R 0777 /var/www/html/var/cache
+chmod -R 2777 /var/www/html/var/cache
 
 exec "$@"
