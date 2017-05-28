@@ -20,10 +20,10 @@ permissions:
     mode: 2644 # Initial '2' means 'setgid'
     type:
       - file
-  - object: /home/ec2-user/clients/reminder-engine/webdata/tools
-    mode: 755
-    type:
-      - file
+#  - object: /home/ec2-user/clients/reminder-engine/webdata/tools
+#    mode: 755
+#    type:
+#      - file
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     except: [var]
