@@ -12,7 +12,7 @@ services:
       - "28017:28017"
   php-fpm-alpine:
     build: ./php-fpm-alpine
-    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/php71-fpm-alpine-sf-dev:v0.2
+    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/php71-fpm-alpine-sf-dev:v0.3
     container_name: php-reminder-engine
     volumes_from:
       - sourcecode-data

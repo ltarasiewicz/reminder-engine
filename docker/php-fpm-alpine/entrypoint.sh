@@ -16,6 +16,6 @@ echo "xdebug.remote_host=${host_ip_as_seen_from_docker}" >> /usr/local/etc/php/c
 chown -R :82 /var/www/html
 chmod -R g+s /var/www/html
 chown 82:82 /var/log/php-fpm && chmod 0755 /var/log/php-fpm
-chmod -R 2777 /var/www/html/var/cache
+[ -d /var/www/html/var/cache ] && chmod -R 2777 /var/www/html/var/cache # set permissions only if dir exists
 
 exec "$@"
