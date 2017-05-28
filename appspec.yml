@@ -20,7 +20,7 @@ permissions:
     type:
       - file
   - object: /home/ec2-user/clients/reminder-engine/webdata/tools
-    pattern: "**"
+    pattern: "*.sh"
     mode: 0750
     type:
       - file
