@@ -15,7 +15,6 @@ files:
 permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
-    owner: luqo33
     group: www-data
     mode: 6644 # Initial '6' means we 'setuid' and 'setgid'
     type:
@@ -23,14 +22,12 @@ permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     except: [var]
-    owner: luqo33
     group: www-data
     mode: 6751
     type:
       - directory
   - object: /home/ec2-user/clients/reminder-engine/webdata
-    pattern: "var"
-    owner: luqo33
+    pattern: "var"-
     group: www-data
     mode: 6777
     type:
