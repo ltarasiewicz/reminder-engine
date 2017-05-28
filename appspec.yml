@@ -42,9 +42,9 @@ hooks:
   AfterInstall:
     - location: deployment_scripts/composer_install.sh
       timeout: 120
-    - location: deployment_scripts/server_requirements.sh # This needs to come after composer install
-      timeout: 120
     - location: deployment_scripts/cache_clear.sh
       timeout: 120
     - location: deployment_scripts/cache_warmup.sh
+      timeout: 120
+    - location: deployment_scripts/server_requirements.sh # This needs to come after composer install
       timeout: 120
