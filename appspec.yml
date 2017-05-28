@@ -48,3 +48,5 @@ hooks:
       timeout: 120
     - location: deployment_scripts/cache_clear.sh
       timeout: 120
+    - location: deployment_scripts/cache_warmup.sh
+      timeout: 120
