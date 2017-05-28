@@ -19,6 +19,11 @@ permissions:
     mode: 6644 # Initial '6' means we 'setuid' and 'setgid'
     type:
       - file
+  - object: /home/ec2-user/clients/reminder-engine/webdata/tools
+    pattern: "**"
+    mode: 0750
+    type:
+      - file
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     except: [var]
