@@ -21,7 +21,7 @@ permissions:
       - file
   - object: /home/ec2-user/clients/reminder-engine/webdata/tools
     pattern: "*.sh"
-    mode: 750
+    mode: 755
     type:
       - file
   - object: /home/ec2-user/clients/reminder-engine/webdata
