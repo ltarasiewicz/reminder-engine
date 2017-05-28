@@ -15,7 +15,7 @@ files:
 permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
-    except: [tools/*.sh]
+    except: ["*.sh"]
     group: www-data
     mode: 2644 # Initial '2' means 'setgid'
     type:
