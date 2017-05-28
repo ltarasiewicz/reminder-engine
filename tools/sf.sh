@@ -1,4 +1,5 @@
 #!/bin/bash
 
 echo "Run 'php app/console $*' on php-fpm-alpine";
-docker exec -it -u $(id -u $USER)  php-reminder-engine sh -c "cd /var/www/html && php bin/console $*"
+php_container=$(docker ps | grep php71-fpm | cut -f 1 -d ' ')
+docker exec -it -u $(id -u $USER)  ${php_container} sh -c "cd /var/www/html && php bin/console $*"
