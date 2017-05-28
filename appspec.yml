@@ -27,14 +27,12 @@ permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     except: [var]
-    owner: ec2-user
     group: www-data
     mode: 6751
     type:
       - directory
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "var"
-    owner: ec2-user
     group: www-data
     mode: 6777
     type:
