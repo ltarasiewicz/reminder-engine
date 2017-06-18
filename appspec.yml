@@ -16,7 +16,7 @@ permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     except: [tools/c.sh, tools/sf.sh]
-    group: www-data
+#    group: www-data
     mode: 2644 # Initial '2' means 'setgid'
     type:
       - file
@@ -27,7 +27,7 @@ permissions:
   - object: /home/ec2-user/clients/reminder-engine/webdata
     pattern: "**"
     except: [var]
-    group: www-data
+#    group: www-data
     mode: 6751
     type:
       - directory
@@ -45,6 +45,8 @@ hooks:
     - location: deployment_scripts/cache_clear.sh
       timeout: 120
     - location: deployment_scripts/cache_warmup.sh
+      timeout: 120
+    - location: deployment_scripts/fix_file_permissions.sh
       timeout: 120
     - location: deployment_scripts/server_requirements.sh # This needs to come after composer install
       timeout: 120

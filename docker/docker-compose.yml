@@ -12,13 +12,13 @@ services:
       - "28017:28017"
   php-fpm-alpine:
     build: ./php-fpm-alpine
-    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/php71-fpm-alpine-sf-dev:v0.3
+    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/php71-fpm-alpine-sf-dev:v0.4
     container_name: php-reminder-engine
     volumes_from:
       - sourcecode-data
   nginx-alpine: # from alpine:3.4
     build: ./nginx-alpine
-    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/nginx-alpine-wp:v0.7
+    image: 320782110801.dkr.ecr.ap-southeast-2.amazonaws.com/nginx-alpine-sf-dev:v0.2
     ports:
       - "8080:80"
     volumes:

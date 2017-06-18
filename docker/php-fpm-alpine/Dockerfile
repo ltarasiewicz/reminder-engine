@@ -31,9 +31,10 @@ RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/php.ini
 RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/php.ini
 RUN echo "xdebug.ide_key=PHPSTORM" >> /usr/local/etc/php/conf.d/php.ini
 
-RUN addgroup sudo
-RUN adduser -D default -G sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+# Make sure user and group www-data exist with uid and gid 82
+RUN set -x ; \
+getent group www-data || addgroup -g 82 -S www-data ; \
+  id -u www-data || adduser -u 82 -D -S -G www-data www-data
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
