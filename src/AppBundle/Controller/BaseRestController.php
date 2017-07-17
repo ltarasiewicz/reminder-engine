@@ -127,4 +127,19 @@ class BaseRestController extends FOSRestController implements ClassResourceInter
     {
         return 0 < $list->count();
     }
+
+    /**
+     * @param ConstraintViolationListInterface $list
+     *
+     * @return array
+     */
+    protected function getConstraintViolations(ConstraintViolationListInterface $list): array
+    {
+        $violations = [];
+        foreach ($list as $constrainViolation) {
+            $violations[] = $constrainViolation;
+        }
+
+        return $violations;
+    }
 }

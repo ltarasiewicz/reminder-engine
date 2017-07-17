@@ -7,11 +7,8 @@ use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Document\Participant;
-use AppBundle\Form\Type\ParticipantType;
 use FOS\RestBundle\Controller\Annotations as FOS;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -19,10 +16,18 @@ class EventController extends BaseRestController
 {
     /**
      * @ApiDoc(
-     *     description="Return all Events.",
-     *     resource=true
+     *     resource=true,
+     *     resourceDescription="Create, update and retrieve events",
+     *     description="Return all events.",
+     *     requirements={
+     *         {
+     *              "name"="title",
+     *              "dataType"="string",
+     *              "requirement"=".+",
+     *              "description"="Get all events.",
+     *         },
+     *     }
      * )
-     * @View()
      */
     public function cgetAction()
     {
@@ -36,23 +41,63 @@ class EventController extends BaseRestController
 
     /**
      * @ApiDoc(
-     *     description="Create an Event or update an existing Event.",
-     *      parameters={
-     *          {"name"="title", "dataType"="string", "required"=true, "format"="", "description"=""},
-     *          {"name"="start_time", "dataType"="datetime", "required"=false, "format"="datetime string", "description"=""},
-     *          {"name"="end_time", "dataType"="datetime", "required"=false, "format"="datetime string", "description"=""},
-     *          {"name"="venue", "dataType"="array", "required"=false, "format"="", "description"=""}
-     *  }
+     *     description="Retrieve event by ID.",
      * )
-     * @ParamConverter("event", converter="fos_rest.request_body")
+     */
+    public function getAction($id): ?Event
+    {
+        $eventRepository = $this->getDocumentManager()->getRepository(Event::class);
+        /** @var Event $event */
+        $event =  $eventRepository->find($id);
+
+        return $event;
+    }
+
+    /**
+     * @ApiDoc(
+     *     description="Create an Event or update an existing Event.",
+     *     requirements={
+     *         {
+     *              "name"="title",
+     *              "dataType"="string",
+     *              "requirement"=".+",
+     *              "description"="Event title - simple identifier",
+     *         },
+     *          {
+     *              "name"="start_time",
+     *              "dataType"="datetime",
+     *              "requirement"="datetime string",
+     *              "description"="When the event starts.",
+     *          },
+     *          {
+     *              "name"="duration",
+     *              "dataType"="datetime",
+     *              "requirement"="datetime string",
+     *              "description"="How long is the event scheduled for."
+     *          },
+     *          {
+     *              "name"="venue",
+     *              "dataType"="AppBundle\Document\Venue",
+     *              "format"="",
+     *              "description"=""
+     *          },
+     *     }
+     * )
+     * @ParamConverter(
+     *     "event",
+     *     converter="app.retrievable_entity_converter",
+     *     options={
+     *          "retrievableEntities"={
+     *              "AppBundle\Document\Venue",
+     *          }
+     *     }
+     * )
      * @FOS\View()
      * @FOS\NoRoute()
      * @FOS\Post("/events")
      */
     public function cpostAction(Event $event, ConstraintViolationListInterface $validation)
     {
-        //$this->guardAgainstInretrievableEntity($event);
-
         if (!$this->hasValidationErrors($validation)) {
             $dm = $this->getDocumentManager();
             $dm->persist($event);

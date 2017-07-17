@@ -2,7 +2,6 @@
 
 namespace AppBundle\Document;
 
-use AppBundle\Document\Abstraction\IdentifiableInterface;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ODM\Document()
  */
-class Venue implements IdentifiableInterface
+class Venue
 {
     /**
      * @ODM\Id()
@@ -23,7 +22,6 @@ class Venue implements IdentifiableInterface
      *
      * @ODM\Field(type="string")
      * @JMS\Type("string")
-     * @Assert\NotNull()
      */
     private $country;
 
@@ -49,21 +47,13 @@ class Venue implements IdentifiableInterface
      * @ODM\Field(type="string")
      * @JMS\Type("string")
      */
-    private $street;
+    private $streetAddress;
 
     /**
-     * @var string
+     * @var PhoneNumber
      *
-     * @ODM\Field(type="string")
-     * @JMS\Type("string")
-     */
-    private $buildingNumber;
-
-    /**
-     * @var string
-     *
-     * @ODM\Field(type="string")
-     * @JMS\Type("string")
+     * @ODM\EmbedOne(targetDocument="PhoneNumber")
+     * @JMS\Type("AppBundle\Document\PhoneNumber")
      */
     private $contactNumber;
 
@@ -84,21 +74,9 @@ class Venue implements IdentifiableInterface
     }
 
     /**
-     * @param mixed $id
-     *
-     * @return Venue
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getCountry(): string
+    public function getCountry()
     {
         return $this->country;
     }
@@ -108,7 +86,7 @@ class Venue implements IdentifiableInterface
      *
      * @return Venue
      */
-    public function setCountry(string $country): Venue
+    public function setCountry(string $country)
     {
         $this->country = $country;
 
@@ -118,7 +96,7 @@ class Venue implements IdentifiableInterface
     /**
      * @return string
      */
-    public function getCity(): string
+    public function getCity()
     {
         return $this->city;
     }
@@ -128,7 +106,7 @@ class Venue implements IdentifiableInterface
      *
      * @return Venue
      */
-    public function setCity(string $city): Venue
+    public function setCity(string $city)
     {
         $this->city = $city;
 
@@ -138,7 +116,7 @@ class Venue implements IdentifiableInterface
     /**
      * @return string
      */
-    public function getProvince(): string
+    public function getProvince()
     {
         return $this->province;
     }
@@ -148,7 +126,7 @@ class Venue implements IdentifiableInterface
      *
      * @return Venue
      */
-    public function setProvince(string $province): Venue
+    public function setProvince(string $province)
     {
         $this->province = $province;
 
@@ -158,47 +136,27 @@ class Venue implements IdentifiableInterface
     /**
      * @return string
      */
-    public function getStreet(): string
+    public function getStreetAddress(): string
     {
-        return $this->street;
+        return $this->streetAddress;
     }
 
     /**
-     * @param string $street
+     * @param string $streetAddress
      *
      * @return Venue
      */
-    public function setStreet(string $street): Venue
+    public function setStreetAddress(string $streetAddress)
     {
-        $this->street = $street;
+        $this->streetAddress = $streetAddress;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return PhoneNumber
      */
-    public function getBuildingNumber(): string
-    {
-        return $this->buildingNumber;
-    }
-
-    /**
-     * @param string $buildingNumber
-     *
-     * @return Venue
-     */
-    public function setBuildingNumber(string $buildingNumber): Venue
-    {
-        $this->buildingNumber = $buildingNumber;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContactNumber(): string
+    public function getContactNumber()
     {
         return $this->contactNumber;
     }
@@ -208,7 +166,7 @@ class Venue implements IdentifiableInterface
      *
      * @return Venue
      */
-    public function setContactNumber(string $contactNumber): Venue
+    public function setContactNumber(string $contactNumber)
     {
         $this->contactNumber = $contactNumber;
 
@@ -218,7 +176,7 @@ class Venue implements IdentifiableInterface
     /**
      * @return string
      */
-    public function getShortName(): string
+    public function getShortName()
     {
         return $this->shortName;
     }
@@ -228,7 +186,7 @@ class Venue implements IdentifiableInterface
      *
      * @return Venue
      */
-    public function setShortName(string $shortName): Venue
+    public function setShortName(string $shortName)
     {
         $this->shortName = $shortName;
 

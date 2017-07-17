@@ -1,0 +1,3 @@
+AppBundle\Document\Event:
+    dentist_appointment_1:
+        title: Tooth extraction

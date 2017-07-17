@@ -1,0 +1,9 @@
+AppBundle\Document\EmailAddress:
+    event__tooth_extraction:
+        title: Tooth extraction
+        guests: ['@participant__mr_bean', '@participant__mr_pear']
+
+AppBundle\Document\PhoneNumber:
+    event__tooth_extraction:
+        title: Tooth extraction
+        guests: ['@participant__mr_bean', '@participant__mr_pear']

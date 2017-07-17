@@ -2,12 +2,16 @@ default:
     suites:
         default:
             type: symfony_bundle
-            bundle: AppBundle
+            bundle: TestingAppBundle
             paths:
-                features: %paths.base%/src/AppBundle/features
+                features: %paths.base%/src/TestingAppBundle/Features
 #                bootstrap: %paths.base%/src/Meeebu/OptimizerBundle/Features/Bootstrap
             contexts:
-                - Fidry\AliceBundleExtension\Context\Doctrine\AliceODMContext
+                - Rezzza\RestApiBehatExtension\RestApiContext
+                - Rezzza\RestApiBehatExtension\Json\JsonContext
+                - Fidry\AliceBundleExtension\Context\Doctrine\AliceODMContext:
+                    basePath: %paths.base%/src/TestingAppBundle/Fixtures
+
 
     extensions:
         Behat\Symfony2Extension:
@@ -16,3 +20,7 @@ default:
                 debug: true
         Fidry\AliceBundleExtension\Extension:
             fixtures_base_path: ~ # default to %paths.base%/features/fixtures
+        Rezzza\RestApiBehatExtension\Extension:
+            rest:
+                base_url: 172.18.0.1:8080/app_dev.php
+                store_response: true

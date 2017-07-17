@@ -7,6 +7,7 @@ use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use FOS\RestBundle\Controller\Annotations\View;
 use AppBundle\Document\Participant;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +47,7 @@ class ParticipantController extends BaseRestController
      * )
      * @FOS\NoRoute()
      * @FOS\Post("/participants")
+     * @ParamConverter("participant", converter="fos_rest.request_body")
      *
      * @param Participant                      $participant
      * @param ConstraintViolationListInterface $validation
@@ -53,6 +55,7 @@ class ParticipantController extends BaseRestController
      */
     public function cpostAction(Participant $participant, ConstraintViolationListInterface $validation)
     {
+        $stop = 'sd';
         if (!$this->hasValidationErrors($validation)) {
             $dm = $this->getDocumentManager();
             $dm->persist($participant);

@@ -1,10 +1,14 @@
-services:
-    app.mongodb_param_converter:
-        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
-        arguments:
-            - "@doctrine_mongodb"
-        tags:
-            - { name: request.param_converter, converter: doctrine.odm }
+imports:
+    - { resource: util/param_converter.yml }
 
+services:
     app.util.object_property_mapper:
         class: AppBundle\Util\ObjectPropertyMapper\ObjectPropertyMapper
+
+#    # ToDo: Use a factory in order to fetch Document Manager from @doctrine_mongodb and inject that instead of @doctrine_mongodb
+#    app.retrievable_entity.jms_deserialization_handler:
+#        class: AppBundle\JMS\RetrievableEntityDeserializationHandler
+#        arguments:
+#            - "@doctrine_mongodb.odm.document_manager"
+#        tags:
+#            - { name: jms_serializer.subscribing_handler }

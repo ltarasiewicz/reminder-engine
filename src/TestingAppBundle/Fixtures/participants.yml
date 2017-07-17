@@ -1,0 +1,6 @@
+AppBundle\Document\Participant:
+    participant__mr_bean:
+        firstName: '<name()>'
+        lastName: '<name()>'
+        emailAddress: '@email_address__1'
+        phoneNumber: '@phone_number__1'

@@ -1,0 +1,3 @@
+include:
+    - ../participants.yml
+    - ../events.yml

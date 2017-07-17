@@ -13,8 +13,9 @@ class VenueController extends BaseRestController
 {
     /**
      * @ApiDoc(
-     *     description="Return all Venues.",
-     *     resource=true
+     *     resource=true,
+     *     resourceDescription="Creating, editing and retrieving venues",
+     *     description="Return all venues.",
      * )
      * @View
      */
@@ -30,22 +31,50 @@ class VenueController extends BaseRestController
 
     /**
      * @ApiDoc(
-     *     description="Create a Venue.",
+     *     description="Create a venue.",
      *     requirements={
      *         {
      *             "name"="short_name",
      *             "dataType"="string",
-     *             "requirement"="",
+     *             "requirement"=".+",
      *             "description"="Short representation of the venue"
      *         }
      *     },
      *     parameters={
-     *         {"name"="country", "dataType"="string", "required"=false, "format"="", "description"=""},
-     *         {"name"="city", "dataType"="string", "required"=false, "format"="", "description"=""},
-     *         {"name"="province", "dataType"="string", "required"=false, "format"="", "description"=""},
-     *         {"name"="street", "dataType"="string", "required"=false, "format"="", "description"=""},
-     *         {"name"="building_number", "dataType"="string", "required"=false, "format"="", "description"=""},
-     *         {"name"="contact_number", "dataType"="string", "required"=false, "format"="", "description"=""}
+     *         {
+     *              "name"="country",
+     *              "dataType"="string",
+     *              "required"=false, "format"=".+",
+     *              "description"=""
+     *          },
+     *         {
+     *              "name"="city",
+     *              "dataType"="string",
+     *              "required"=false,
+     *              "format"=".+",
+     *              "description"=""
+     *          },
+     *         {
+     *              "name"="province",
+     *              "dataType"="string",
+     *              "required"=false,
+     *              "format"=".+",
+     *              "description"=""
+     *          },
+     *         {
+     *              "name"="street_address",
+     *              "dataType"="string",
+     *              "required"=false,
+     *              "format"=".+",
+     *              "description"=""
+     *          },
+     *         {
+     *              "name"="contact_number",
+     *              "dataType"="string",
+     *              "required"=false,
+     *              "format"="\d+",
+     *              "description"=""
+     *          }
      *     }
      * )
      * @View

@@ -18,11 +18,5 @@
 # IDE
 .idea
 
-# Docker Jenkins volume
-/jenkins_data
-
-# MongoDB access
-mongo-params.env
-
 # Exclude random backup files
 *~

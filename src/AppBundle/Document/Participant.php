@@ -2,21 +2,21 @@
 
 namespace AppBundle\Document;
 
-use AppBundle\Document\Abstraction\IdentifiableInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as JMS;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique;
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints as MongoAssert;
 
 /**
  * @ODM\Document()
- * @Unique("emailAddress")
+ * @MongoAssert\Unique("emailAddress")
+ * @MongoAssert\Unique("phoneNumber")
  */
-class Participant implements IdentifiableInterface
+class Participant
 {
     /**
      * @ODM\Id()
+     * @JMS\Type("string")
      */
     private $id;
 
@@ -24,138 +24,36 @@ class Participant implements IdentifiableInterface
      * @var string
      *
      * @ODM\Field(type="string")
-     * @Assert\NotBlank()
      * @JMS\Type("string")
+     * @Assert\NotBlank()
      */
-    private $name;
+    private $firstName;
 
     /**
      * @var string
      *
      * @ODM\Field(type="string")
-     * @ODM\UniqueIndex()
      * @JMS\Type("string")
+     * @Assert\NotBlank()
+     */
+    private $lastName;
+
+    /**
+     * @var EmailAddress
+     *
+     * @ODM\EmbedOne(targetDocument="EmailAddress")
+     * @JMS\Type("AppBundle\Document\EmailAddress")
      */
     private $emailAddress;
 
     /**
-     * @var string
+     * @var PhoneNumber
      *
-     * @ODM\Field(type="string")
-     * @JMS\Type("string")
+     * @ODM\EmbedOne(targetDocument="PhoneNumber")
+     * @JMS\Type("AppBundle\Document\PhoneNumber")
      */
     private $phoneNumber;
 
-    /**
-     * @var Event[]
-     *
-     * @ODM\ReferenceMany(targetDocument="Event")
-     */
-    private $incomingEvents;
-
-    /**
-     * @var Reminder[]
-     *
-     * @ODM\EmbedMany(targetDocument="Reminder")
-     */
-    private $reminders;
-
-
-    public function __construct()
-    {
-        $this->incomingEvents = new ArrayCollection();
-        $this->reminders = new ArrayCollection();
-    }
-
-    /**
-     * @return Reminder[]
-     */
-    public function getReminders(): array
-    {
-        return $this->reminders;
-    }
-
-    /**
-     * @param ArrayCollection $reminders
-     *
-     * @return Participant
-     */
-    public function setReminders(ArrayCollection $reminders): Participant
-    {
-        $this->reminders = $reminders;
-
-        return $this;
-    }
-
-    /**
-     * @param Reminder $reminder
-     *
-     * @return Participant
-     */
-    public function addReminder(Reminder $reminder): Participant
-    {
-        $this->reminders->add($reminder);
-
-        return $this;
-    }
-
-    /**
-     * @param Reminder $reminder
-     *
-     * @return Participant
-     */
-    public function removeReminder(Reminder $reminder): Participant
-    {
-        $this->reminders->removeElement($reminder);
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getIncomingEvents(): ArrayCollection
-    {
-        return $this->incomingEvents;
-    }
-
-    /**
-     * @param ArrayCollection $incomingEvents
-     *
-     * @return Participant
-     */
-    public function setIncomingEvents(ArrayCollection $incomingEvents): Participant
-    {
-        $this->incomingEvents = $incomingEvents;
-
-        return $this;
-    }
-
-    /**
-     * @param Event $event
-     *
-     * @return Participant
-     */
-    public function addIncomingEvent(Event $event): Participant
-    {
-        if (!$this->incomingEvents->contains($event)) {
-            $this->incomingEvents->add($event);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Event $event
-     *
-     * @return Participant
-     */
-    public function removeIncomingEvent(Event $event): Participant
-    {
-        $this->incomingEvents->removeElement($event);
-
-        return $this;
-    }
 
     /**
      * @return string
@@ -166,11 +64,11 @@ class Participant implements IdentifiableInterface
     }
 
     /**
-     * @param string $emailAddress
+     * @param EmailAddress $emailAddress
      *
      * @return Participant
      */
-    public function setEmailAddress($emailAddress)
+    public function setEmailAddress(EmailAddress $emailAddress)
     {
         $this->emailAddress = $emailAddress;
 
@@ -186,11 +84,11 @@ class Participant implements IdentifiableInterface
     }
 
     /**
-     * @param string $phoneNumber
+     * @param PhoneNumber $phoneNumber
      *
      * @return Participant
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(PhoneNumber $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -200,21 +98,43 @@ class Participant implements IdentifiableInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getLastName()
     {
-        return $this->name;
+        return $this->lastName;
     }
 
     /**
-     * @param string $name
+     * @param string $lastName
+     *
+     * @return string
+     */
+    public function setLastName(string $lastName)
+    {
+        return $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
      * @return Participant
      */
-    public function setName($name)
+    public function setFirstName(string $firstName)
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
@@ -223,8 +143,8 @@ class Participant implements IdentifiableInterface
     /**
      * @return string
      */
-    function __toString(): string
+    function __toString()
     {
-        return $this->getName();
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 }
