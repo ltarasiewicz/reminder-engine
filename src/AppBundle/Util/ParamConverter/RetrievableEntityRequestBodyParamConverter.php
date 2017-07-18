@@ -48,6 +48,10 @@ class RetrievableEntityRequestBodyParamConverter extends FOSRequestBodyParamConv
             throw new Exception('retrievableEntities option is required.');
         }
 
+        $retrievableEntitiesConfiguration = $this->retrivableEntitiesConfigurationFactory
+            ->create($options['retrievableEntities'])
+        ;
+
         $classToIdMap = $this->retrievableObjectKeysRemover->removeKeys($request, $options['retrievableEntities']);
 
         parent::apply($request, $configuration);
