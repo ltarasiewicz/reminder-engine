@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Util\ParamConverter;
 
-class FQCNToJsonKeyTransformer
+class FqcnToJsonKeyTransformer
 {
     /**
      * @param string $fqcn E.g. "AppBundle\Document\SportingEvent"

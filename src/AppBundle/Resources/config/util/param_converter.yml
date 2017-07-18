@@ -21,4 +21,4 @@ services:
             - "@app.fqcn_to_json_key_transformer"
 
     app.fqcn_to_json_key_transformer:
-        class: AppBundle\Util\ParamConverter\FQCNToJsonKeyTransformer
+        class: AppBundle\Util\ParamConverter\FqcnToJsonKeyTransformer

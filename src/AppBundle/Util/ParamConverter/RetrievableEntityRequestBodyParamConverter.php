@@ -59,11 +59,11 @@ class RetrievableEntityRequestBodyParamConverter extends FOSRequestBodyParamConv
 
     /**
      * @param object $baseObject
-     * @param array  $classToIdMap
+     * @param array  $fqcnToIdMap
      */
-    private function setRetrievableEntitiesOnTheBaseObject($baseObject, array $classToIdMap)
+    private function setRetrievableEntitiesOnTheBaseObject($baseObject, array $fqcnToIdMap)
     {
-        foreach ($classToIdMap as $fqcn => $id) {
+        foreach ($fqcnToIdMap as $fqcn => $id) {
             $retrievedEntity = $this->documentManager->getRepository($fqcn)->find($id);
             $setter = 'set' . substr(strrchr($fqcn, '\\'), 1);
             $baseObject->$setter($retrievedEntity);

@@ -88,7 +88,10 @@ class EventController extends BaseRestController
      *     converter="app.retrievable_entity_converter",
      *     options={
      *          "retrievableEntities"={
-     *              "AppBundle\Document\Venue",
+     *              "AppBundle\Document\Venue"={
+     *                  "identifier"="id",
+     *                  "jsonKey"="venue"
+     *               }
      *          }
      *     }
      * )

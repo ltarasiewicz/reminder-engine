@@ -6,7 +6,7 @@ namespace AppBundle\Util\ParamConverter;
 use Iterator;
 use Exception;
 
-class FQCNToJsonKeyIterator implements Iterator
+class FqcnToJsonKeyIterator implements Iterator
 {
 
     /** @var string[] */
