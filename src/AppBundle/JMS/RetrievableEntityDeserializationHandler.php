@@ -30,13 +30,13 @@ class RetrievableEntityDeserializationHandler implements SubscribingHandlerInter
             [
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format'    => 'json',
-                'type'      => 'RetrievableEntity<AppBundle\Document\EmailAddress>',
+                'type'      => 'RetrievableEntity223<AppBundle\Document\EmailAddress>',
                 'method'    => 'deserializeRetrievableEntity',
             ],
             [
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format'    => 'json',
-                'type'      => 'RetrievableEntity<AppBundle\Document\PhoneNumber>',
+                'type'      => 'RetrievableEntity223<AppBundle\Document\PhoneNumber>',
                 'method'    => 'deserializeRetrievableEntity',
             ],
         ];

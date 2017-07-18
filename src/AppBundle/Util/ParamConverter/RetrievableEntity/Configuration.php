@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Util\ParamConverter;
+namespace AppBundle\Util\ParamConverter\RetrievableEntity;
 
 use IteratorAggregate;
 use ArrayIterator;
 
-class RetrievableEntityConfiguration implements IteratorAggregate
+class Configuration implements IteratorAggregate
 {
-    /** @var RetrievableEntityDefinition[] */
+    /** @var Definition[] */
     private $retrievableEntityDefinitions;
 
     /**

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Util\ParamConverter;
+namespace AppBundle\Util\ParamConverter\RetrievableEntity;
 
 class FqcnToJsonKeyTransformer
 {

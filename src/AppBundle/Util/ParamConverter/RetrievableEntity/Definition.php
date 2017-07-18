@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Util\ParamConverter;
+namespace AppBundle\Util\ParamConverter\RetrievableEntity;
 
-class RetrievableEntityDefinition
+class Definition
 {
     /**
      * @var string
@@ -55,6 +55,4 @@ class RetrievableEntityDefinition
     {
         return $this->fqcn;
     }
-
-
 }

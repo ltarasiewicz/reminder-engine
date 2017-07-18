@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Util\ParamConverter;
+namespace AppBundle\Util\ParamConverter\RetrievableEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class RetrievableObjectKeysRemover
+class RequestContentKeysRemover
 {
     const DEFAULT_IDENTIFIER = 'id';
 
@@ -13,7 +13,7 @@ class RetrievableObjectKeysRemover
     private $fqcnToJsonKeyTransformer;
 
     /**
-     * RetrievableObjectKeysRemover constructor.
+     * RequestContentKeysRemover constructor.
      *
      * @param FqcnToJsonKeyTransformer $fqcnToJsonKeyTransformer
      */
@@ -27,20 +27,15 @@ class RetrievableObjectKeysRemover
      *
      * Remove request parameters representing retrievable entities.
      *
-     * ToDo: Prepare a document about this functionality
-     * ToDo: Extract this functionality into a separate bundle
-     * ToDo: $retrievableEntitiesFqcn shoule be replaced with a configuration object, the object should be built with a factory service
-     * ToDo: All formatting and default values logic should be encapsulated in the configuration object
-     *
-     * @param Request                          $request
-     * @param RetrievableEntityConfiguration   $configuration
+     * @param Request       $request
+     * @param Configuration $configuration
      *
      * @return array
      */
-    public function removeKeys(Request $request, RetrievableEntityConfiguration $configuration): array
+    public function removeKeys(Request $request, Configuration $configuration): array
     {
         $classToEntityIdMap = [];
-        /** @var RetrievableEntityDefinition $retrievableEntityDefinition */
+        /** @var Definition $retrievableEntityDefinition */
         foreach ($configuration as $retrievableEntityDefinition) {
             if (!empty($retrievableEntityDefinition->getId())) {
                 $classToEntityIdMap[$retrievableEntityDefinition->getFqcn()] = $retrievableEntityDefinition->getId();

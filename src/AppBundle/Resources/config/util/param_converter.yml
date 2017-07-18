@@ -6,19 +6,25 @@ services:
         tags:
             - { name: request.param_converter, converter: doctrine.odm }
 
-    app.retrievable_entity_request_body_param_converter:
+    app.request_body_param_converter:
         parent: fos_rest.converter.request_body
-        class: AppBundle\Util\ParamConverter\RetrievableEntityRequestBodyParamConverter
+        class: AppBundle\Util\ParamConverter\RetrievableEntity\RequestBodyParamConverter
         arguments:
             - "@doctrine_mongodb.odm.document_manager"
-            - "@app.retrievable_object_keys_remover"
+            - "@app.request_content_keys_remover"
+            - "@app.configuration_factory"
         tags:
             - { name: request.param_converter, converter: app.retrievable_entity_converter }
 
-    app.retrievable_object_keys_remover:
-        class: AppBundle\Util\ParamConverter\RetrievableObjectKeysRemover
+    app.request_content_keys_remover:
+        class: AppBundle\Util\ParamConverter\RetrievableEntity\RequestContentKeysRemover
         arguments:
             - "@app.fqcn_to_json_key_transformer"
 
     app.fqcn_to_json_key_transformer:
-        class: AppBundle\Util\ParamConverter\FqcnToJsonKeyTransformer
+        class: AppBundle\Util\ParamConverter\RetrievableEntity\FqcnToJsonKeyTransformer
+
+    app.configuration_factory:
+        class: AppBundle\Util\ParamConverter\RetrievableEntity\ConfigurationFactory
+        arguments:
+            - "@app.fqcn_to_json_key_transformer"

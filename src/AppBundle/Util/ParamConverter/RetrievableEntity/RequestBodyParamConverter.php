@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace AppBundle\Util\ParamConverter;
+namespace AppBundle\Util\ParamConverter\RetrievableEntity;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,17 +11,21 @@ use FOS\RestBundle\Serializer\Serializer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class RetrievableEntityRequestBodyParamConverter extends FOSRequestBodyParamConverter
+class RequestBodyParamConverter extends FOSRequestBodyParamConverter
 {
     /** @var ObjectManager */
     private $documentManager;
-    /** @var RetrievableObjectKeysRemover */
-    private $retrievableObjectKeysRemover;
+    /** @var RequestContentKeysRemover */
+    private $requestContentKeysRemover;
+    /** @var ConfigurationFactory */
+    private $configurationFactory;
+
     /**
      * {@inheritdoc}
      *
-     * @param ObjectManager                $documentManager
-     * @param RetrievableObjectKeysRemover $retrievableObjectKeysRemover
+     * @param ObjectManager             $documentManager
+     * @param RequestContentKeysRemover $requestContentKeysRemover
+     * @param ConfigurationFactory      $configurationFactory
      */
     public function __construct(
         Serializer $serializer,
@@ -30,12 +34,14 @@ class RetrievableEntityRequestBodyParamConverter extends FOSRequestBodyParamConv
         ValidatorInterface $validator = null,
         $validationErrorsArgument = null,
         ObjectManager $documentManager,
-        RetrievableObjectKeysRemover $retrievableObjectKeysRemover
+        RequestContentKeysRemover $requestContentKeysRemover,
+        ConfigurationFactory $configurationFactory
     )
     {
         parent::__construct($serializer, $groups, $version, $validator, $validationErrorsArgument);
         $this->documentManager = $documentManager;
-        $this->retrievableObjectKeysRemover = $retrievableObjectKeysRemover;
+        $this->requestContentKeysRemover = $requestContentKeysRemover;
+        $this->configurationFactory = $configurationFactory;
     }
 
     /**
@@ -48,11 +54,11 @@ class RetrievableEntityRequestBodyParamConverter extends FOSRequestBodyParamConv
             throw new Exception('retrievableEntities option is required.');
         }
 
-        $retrievableEntitiesConfiguration = $this->retrivableEntitiesConfigurationFactory
-            ->create($options['retrievableEntities'])
+        $retrievableEntitiesConfiguration = $this->configurationFactory
+            ->create($request, $options['retrievableEntities'])
         ;
 
-        $classToIdMap = $this->retrievableObjectKeysRemover->removeKeys($request, $options['retrievableEntities']);
+        $classToIdMap = $this->requestContentKeysRemover->removeKeys($request, $retrievableEntitiesConfiguration);
 
         parent::apply($request, $configuration);
 
