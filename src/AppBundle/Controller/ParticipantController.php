@@ -47,8 +47,22 @@ class ParticipantController extends BaseRestController
      * )
      * @FOS\NoRoute()
      * @FOS\Post("/participants")
-     * @ParamConverter("participant", converter="fos_rest.request_body")
-     *
+     * @ParamConverter(
+     *     "participant",
+     *     converter="app.retrievable_entity_converter",
+     *     options={
+     *          "retrievableEntities"={
+     *              "AppBundle\Document\EmailAddress"={
+     *                  "identifier"="email",
+     *                  "jsonKey"="email_address"
+     *               },
+     *              "AppBundle\Document\PhoneNumber"={
+     *                  "identifier"="phone",
+     *                  "jsonKey"="phone_number"
+     *               },
+     *          }
+     *     }
+     * )
      * @param Participant                      $participant
      * @param ConstraintViolationListInterface $validation
      * @return Response|FormInterface
@@ -64,7 +78,7 @@ class ParticipantController extends BaseRestController
             return new Response('', Response::HTTP_CREATED);
         }
 
-        return new Response('Wrong?');
+        return new Response(implode(', ', $this->getValidationErrorMessages($validation)));
     }
 
     /**

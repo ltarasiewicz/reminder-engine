@@ -9,8 +9,6 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints as MongoAssert;
 
 /**
  * @ODM\Document()
- * @MongoAssert\Unique("emailAddress")
- * @MongoAssert\Unique("phoneNumber")
  */
 class Participant
 {

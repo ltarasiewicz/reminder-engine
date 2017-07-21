@@ -15,8 +15,8 @@ class RequestBodyParamConverter extends FOSRequestBodyParamConverter
 {
     /** @var ObjectManager */
     private $documentManager;
-    /** @var RequestContentKeysRemover */
-    private $requestContentKeysRemover;
+    /** @var RequestParametersRemover */
+    private $requestParametersRemover;
     /** @var ConfigurationFactory */
     private $configurationFactory;
 
@@ -24,7 +24,7 @@ class RequestBodyParamConverter extends FOSRequestBodyParamConverter
      * {@inheritdoc}
      *
      * @param ObjectManager             $documentManager
-     * @param RequestContentKeysRemover $requestContentKeysRemover
+     * @param RequestParametersRemover $requestContentKeysRemover
      * @param ConfigurationFactory      $configurationFactory
      */
     public function __construct(
@@ -34,13 +34,13 @@ class RequestBodyParamConverter extends FOSRequestBodyParamConverter
         ValidatorInterface $validator = null,
         $validationErrorsArgument = null,
         ObjectManager $documentManager,
-        RequestContentKeysRemover $requestContentKeysRemover,
+        RequestParametersRemover $requestParametersRemover,
         ConfigurationFactory $configurationFactory
     )
     {
         parent::__construct($serializer, $groups, $version, $validator, $validationErrorsArgument);
         $this->documentManager = $documentManager;
-        $this->requestContentKeysRemover = $requestContentKeysRemover;
+        $this->requestParametersRemover = $requestParametersRemover;
         $this->configurationFactory = $configurationFactory;
     }
 
@@ -58,16 +58,17 @@ class RequestBodyParamConverter extends FOSRequestBodyParamConverter
             ->create($request, $options['retrievableEntities'])
         ;
 
-        $classToIdMap = $this->requestContentKeysRemover->removeKeys($request, $retrievableEntitiesConfiguration);
+        $classToIdMap = $this->requestParametersRemover->remove($request, $retrievableEntitiesConfiguration);
 
         parent::apply($request, $configuration);
 
         $baseObject = $request->attributes->get($configuration->getName());
         $this->setRetrievableEntitiesOnTheBaseObject($baseObject, $classToIdMap);
-
     }
 
     /**
+     * ToDo: Could be converted into a service
+     *
      * @param object $baseObject
      * @param array  $fqcnToIdMap
      */

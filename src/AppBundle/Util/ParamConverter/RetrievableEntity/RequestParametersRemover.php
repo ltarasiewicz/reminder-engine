@@ -5,22 +5,9 @@ namespace AppBundle\Util\ParamConverter\RetrievableEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class RequestContentKeysRemover
+class RequestParametersRemover
 {
     const DEFAULT_IDENTIFIER = 'id';
-
-    /** @var  FqcnToJsonKeyTransformer */
-    private $fqcnToJsonKeyTransformer;
-
-    /**
-     * RequestContentKeysRemover constructor.
-     *
-     * @param FqcnToJsonKeyTransformer $fqcnToJsonKeyTransformer
-     */
-    public function __construct(FqcnToJsonKeyTransformer $fqcnToJsonKeyTransformer)
-    {
-        $this->fqcnToJsonKeyTransformer = $fqcnToJsonKeyTransformer;
-    }
 
     /**
      * Modify the request.
@@ -32,14 +19,14 @@ class RequestContentKeysRemover
      *
      * @return array
      */
-    public function removeKeys(Request $request, Configuration $configuration): array
+    public function remove(Request $request, Configuration $configuration): array
     {
         $classToEntityIdMap = [];
         /** @var Definition $retrievableEntityDefinition */
         foreach ($configuration as $retrievableEntityDefinition) {
             if (!empty($retrievableEntityDefinition->getId())) {
                 $classToEntityIdMap[$retrievableEntityDefinition->getFqcn()] = $retrievableEntityDefinition->getId();
-                $request->request->remove($retrievableEntityDefinition->getKey());
+                $request->request->remove($retrievableEntityDefinition->getPropertyName());
             }
         }
 

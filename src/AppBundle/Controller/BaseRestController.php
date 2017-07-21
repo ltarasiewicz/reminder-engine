@@ -10,6 +10,7 @@ use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Document\Event;
@@ -126,6 +127,22 @@ class BaseRestController extends FOSRestController implements ClassResourceInter
     protected function hasValidationErrors(ConstraintViolationListInterface $list): bool
     {
         return 0 < $list->count();
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $list
+     *
+     * @return array
+     */
+    protected function getValidationErrorMessages(ConstraintViolationListInterface $list): array
+    {
+        $errorMessages = [];
+        /** @var ConstraintViolation $violation */
+        foreach ($list as $violation) {
+            $errorMessages[] = $violation->getMessage();
+        }
+
+        return $errorMessages;
     }
 
     /**

@@ -90,7 +90,7 @@ class EventController extends BaseRestController
      *          "retrievableEntities"={
      *              "AppBundle\Document\Venue"={
      *                  "identifier"="id",
-     *                  "jsonKey"="venue"
+     *                  "propertyName"="venue"
      *               }
      *          }
      *     }

@@ -13,7 +13,7 @@ class Definition
     /**
      * @var string
      */
-    private $key;
+    private $propertyName;
 
     /**
      * @var string
@@ -22,13 +22,13 @@ class Definition
 
     /**
      * @param string $fqcn
-     * @param string $key
+     * @param string $propertyName
      * @param string $id
      */
-    public function __construct(string $fqcn, string $key, string $id)
+    public function __construct(string $fqcn, string $propertyName, string $id)
     {
         $this->id = $id;
-        $this->key = $id;
+        $this->propertyName = $id;
         $this->fqcn = $fqcn;
     }
 
@@ -43,9 +43,9 @@ class Definition
     /**
      * @return string
      */
-    public function getKey(): string
+    public function getPropertyName(): string
     {
-        return $this->key;
+        return $this->propertyName;
     }
 
     /**
